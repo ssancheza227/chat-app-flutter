@@ -2,6 +2,9 @@ import 'package:chat_app/screens/chat/chat_screen.dart';
 import 'package:chat_app/widgets/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../inbox/inbox_screen.dart';
 
 class SignupButton extends StatelessWidget {
   final TextEditingController nameController;
@@ -33,8 +36,12 @@ class SignupButton extends StatelessWidget {
       if (email != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ChatScreen(email)),
+          MaterialPageRoute(builder: (context) => InboxScreen(email)),
         );
+        FirebaseFirestore.instance.collection('users').add({
+          'sender': email,
+          'dateTime': DateTime.now(),
+        });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Could not signup, please try again.')),

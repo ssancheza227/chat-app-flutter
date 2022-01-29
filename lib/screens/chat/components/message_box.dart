@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class MessageBox extends StatelessWidget {
   final String sender;
+  final String destination;
   final String text;
   final bool isMe;
 
   const MessageBox({
     required this.sender,
+    required this.destination,
     required this.text,
     this.isMe = false,
     Key? key,
@@ -31,7 +33,7 @@ class MessageBox extends StatelessWidget {
           Material(
             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
             elevation: 5,
-            color: isMe ? Colors.lightBlueAccent : Colors.white,
+            color: isMe ? Colors.black54 : Colors.white,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
